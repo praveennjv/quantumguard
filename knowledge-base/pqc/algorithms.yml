@@ -1,0 +1,43 @@
+catalog_version: "2026.08"
+note: PQC entries may change as NIST/IETF documents evolve.
+algorithms:
+  - name: ML-KEM
+    type: kem
+    standard: FIPS 203
+    security_level: [1, 3, 5]
+    use_case: key establishment
+    quantum_status: quantum-resistant-candidate
+    classical_security: module-LWE assumption (current)
+    library_support: evolving
+    migration_guidance: Prefer hybrid KEMs for TLS until ecosystem maturity is measured.
+    compatibility: TLS, CMS, application KEMs
+  - name: ML-DSA
+    type: signature
+    standard: FIPS 204
+    security_level: [2, 3, 5]
+    use_case: signatures
+    quantum_status: quantum-resistant-candidate
+    classical_security: module-lattice
+    library_support: evolving
+    migration_guidance: Software-update and PKI signing are high-priority design work.
+    compatibility: certificates, code signing, JOSE/COSE (track drafts)
+  - name: SLH-DSA
+    type: signature
+    standard: FIPS 205
+    security_level: multiple parameter sets
+    use_case: conservative hash-based signatures
+    quantum_status: quantum-resistant-candidate
+    classical_security: hash-based
+    library_support: evolving
+    migration_guidance: Large signatures; use where conservative assumptions matter.
+    compatibility: firmware, roots of trust
+  - name: HQC
+    type: kem
+    standard: NIST additional KEM (evolving)
+    security_level: TBD
+    use_case: KEM diversity
+    quantum_status: quantum-resistant-candidate
+    classical_security: code-based
+    library_support: limited
+    migration_guidance: Do not freeze product logic on draft parameters.
+    compatibility: complementary to ML-KEM

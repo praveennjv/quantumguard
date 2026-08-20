@@ -1,0 +1,7 @@
+application: payment-api
+environment: prod
+business_owner: payments-team
+criticality: critical
+internet_exposure: true
+data_sensitivity: financial
+data_lifetime_years: 10

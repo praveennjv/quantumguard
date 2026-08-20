@@ -1,0 +1,4 @@
+* @quantumguard/maintainers
+/scanner/ @quantumguard/scanner
+/integrations/github/ @quantumguard/scanner
+/.github/workflows/ @quantumguard/maintainers

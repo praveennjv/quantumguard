@@ -1,0 +1,9 @@
+- name: RSA
+  type: public-key
+  quantum_status: quantum-vulnerable
+- name: ECDSA
+  type: signature
+  quantum_status: quantum-vulnerable
+- name: AES
+  type: symmetric
+  quantum_status: grover-reduced

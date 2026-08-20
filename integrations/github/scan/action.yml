@@ -1,0 +1,61 @@
+name: QuantumGuard Scan
+description: Inventory cryptography and estimate quantum-security risk. Does not detect active quantum attacks.
+author: QuantumGuard
+inputs:
+  path:
+    description: Path to scan
+    required: false
+    default: "."
+  fail-on:
+    description: Minimum severity that fails the job
+    required: false
+    default: high
+  output-format:
+    description: json, sarif, cbom, html, or csv
+    required: false
+    default: sarif
+  baseline:
+    description: Optional baseline JSON path
+    required: false
+    default: ""
+  context:
+    description: Optional context YAML/JSON
+    required: false
+    default: ""
+  risk-model:
+    description: Risk model version
+    required: false
+    default: v1-algorithm-only
+runs:
+  using: composite
+  steps:
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+    - name: Install QuantumGuard
+      shell: bash
+      run: python -m pip install --disable-pip-version-check -e "${{ github.action_path }}/../../.."
+    - name: Run QuantumGuard
+      shell: bash
+      env:
+        QG_PATH: ${{ inputs.path }}
+        QG_FAIL: ${{ inputs.fail-on }}
+        QG_FMT: ${{ inputs.output-format }}
+        QG_BASE: ${{ inputs.baseline }}
+        QG_CTX: ${{ inputs.context }}
+        QG_MODEL: ${{ inputs.risk-model }}
+      run: |
+        set -euo pipefail
+        extra=()
+        if [ -n "$QG_BASE" ]; then extra+=(--baseline "$QG_BASE"); fi
+        if [ -n "$QG_CTX" ]; then extra+=(--context "$QG_CTX"); fi
+        python -m scanner.cli.main scan "$QG_PATH" \
+          --fail-on "$QG_FAIL" \
+          --format "$QG_FMT" \
+          --risk-model "$QG_MODEL" \
+          --output "." \
+          "${extra[@]}"
+branding:
+  icon: shield
+  color: purple

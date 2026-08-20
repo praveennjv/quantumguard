@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>QuantumGuard Dashboard (prototype)</title>
+  <style>
+    :root { --bg:#070b14; --card:#121a2b; --text:#e8eefc; --muted:#93a0c2; --accent:#7c5cff; }
+    body { margin:0; font-family: ui-sans-serif, system-ui, sans-serif; background:var(--bg); color:var(--text); }
+    header { padding:1.5rem 2rem; border-bottom:1px solid #243049; }
+    main { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:1rem; padding:1.5rem 2rem; }
+    .card { background:var(--card); border-radius:16px; padding:1.2rem; }
+    .value { font-size:2rem; font-weight:700; }
+    .muted { color:var(--muted); }
+    footer { padding:1rem 2rem; color:var(--muted); }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>QuantumGuard</h1>
+    <p class="muted">Enterprise dashboard prototype (Milestone 3). Load a scan JSON in a later build. Does not detect active quantum attacks.</p>
+  </header>
+  <main>
+    <div class="card"><div class="muted">Quantum Readiness Score</div><div class="value">—</div></div>
+    <div class="card"><div class="muted">Cryptographic Assets</div><div class="value">—</div></div>
+    <div class="card"><div class="muted">Quantum Vulnerable Assets</div><div class="value">—</div></div>
+    <div class="card"><div class="muted">Critical Findings</div><div class="value">—</div></div>
+    <div class="card"><div class="muted">High Findings</div><div class="value">—</div></div>
+    <div class="card"><div class="muted">HNDL Exposure</div><div class="value">—</div></div>
+    <div class="card"><div class="muted">PQC Readiness</div><div class="value">—</div></div>
+    <div class="card"><div class="muted">Migration Progress</div><div class="value">—</div></div>
+  </main>
+  <footer>
+    Charts for algorithms, applications, repositories, teams, severity, quantum exposure, migration status, and trends ship with Milestone 3.
+  </footer>
+</body>
+</html>

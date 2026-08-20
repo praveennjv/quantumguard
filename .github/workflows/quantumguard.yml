@@ -1,0 +1,23 @@
+name: QuantumGuard
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+  security-events: write
+jobs:
+  quantumguard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run QuantumGuard
+        uses: ./integrations/github/scan
+        with:
+          fail-on: never
+          output-format: sarif
+          path: tests/vulnerable
+      - name: Upload SARIF
+        if: always()
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: quantumguard-results.sarif
